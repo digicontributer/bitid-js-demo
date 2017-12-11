@@ -3,7 +3,7 @@ var userCount = 0;
 /**
  *  Constructor
  *  Parameters:
- *    address = bitcoin address associated to the user
+ *    address = digibyte address associated to the user
  *    name = user's name
  */
 function User(address) {

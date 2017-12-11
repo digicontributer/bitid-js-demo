@@ -1,6 +1,6 @@
 {
-  "name": "bitid-js-demo",
-  "description": "Demo of the BitID protocol JavaScript library: https://github.com/porkchop/bitid-js",
+  "name": "digiid-js-demo",
+  "description": "Demo of the DigiID protocol JavaScript library: https://github.com/porkchop/digiid-js",
   "version": "0.0.1",
   "author": {
     "name": "Aaron Caswell",
@@ -14,7 +14,7 @@
     "node": "0.10.x"
   },
   "dependencies": {
-    "bitid": "latest",
+    "digiid": "git://github.com/digicontributer/digiid-js.git#07b32e73f7adb2eedfed0fe6ea3d088e2a951af3",
     "express": "~3.4.8",
     "morgan": "~1.0.0",
     "body-parser": "~1.0.0",
@@ -23,18 +23,18 @@
     "express-partials": "0.2.0"
   },
   "keywords": [
-    "bitcoin",
+    "digibyte",
     "id",
     "identity",
     "identification",
     "authentication",
     "cryptocurrency",
     "auth",
-    "bitid"
+    "digiid"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/porkchop/bitid-js-demo"
+    "url": "https://github.com/porkchop/digiid-js-demo"
   },
   "license": "MIT"
 }

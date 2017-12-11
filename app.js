@@ -1,4 +1,4 @@
-var debug = require('debug')('bitid-js-demo')
+var debug = require('debug')('digiid-js-demo')
   , express = require('express')
   , http = require('http')
   , path = require('path')
@@ -6,12 +6,12 @@ var debug = require('debug')('bitid-js-demo')
   , logger = require('morgan')
   , bodyParser = require('body-parser')
   , partials = require('express-partials')
-  , Bitid = require('bitid')
+  , Digiid = require('digiid')
   , db = require('./db')
   , app = express()
   , server = http.createServer(app)
   , sessionConfig = {
-    secret: 'bitid-js-demo super secret',
+    secret: 'digiid-js-demo super secret',
     key: 'express.sid',
     store: new express.session.MemoryStore()
   }
@@ -60,11 +60,11 @@ app.get('/login', function(req, res) {
   if(req.user) return res.redirect('/user');
 
   var nonce = db.nonces.find(function(nonce) {return nonce.sid === req.sessionID;}) || db.nonces.create(req.sessionID)
-    , bitid = new Bitid({nonce: nonce.id, callback: callbackURL, unsecure: true});
+    , digiid = new Digiid({nonce: nonce.id, callback: callbackURL, unsecure: true});
 
   res.render('login', {
     nonce: nonce.id,
-    bitid: bitid
+    digiid: digiid
   });
 });
 
@@ -75,12 +75,12 @@ app.get('/user', ensureAuthenticated, function(req, res) {
 app.post('/callback', function(req, res) {
   var params = req.body
     , address = params.address
-    , bitid = new Bitid({uri:params.uri, signature:params.signature, address:address, callback:callbackURL});
+    , digiid = new Digiid({uri:params.uri, signature:params.signature, address:address, callback:callbackURL});
 
-  if(!bitid.uriValid()) res.json(401, {message: "BitID URI is invalid or not legal"});
-  else if(!bitid.signatureValid()) res.json(401, {message: "Signature is incorrect"});
+  if(!digiid.uriValid()) res.json(401, {message: "DigiID URI is invalid or not legal"});
+  else if(!digiid.signatureValid()) res.json(401, {message: "Signature is incorrect"});
   else {
-    var nonce = db.nonces.get(bitid.nonce);
+    var nonce = db.nonces.get(digiid.nonce);
     if(!nonce) res.json(401, {message: "NONCE is illegal"});
     else if(nonce.expired()) res.json(401, {message: "NONCE has expired"});
     else {

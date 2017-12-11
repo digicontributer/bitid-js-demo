@@ -6,11 +6,11 @@
 <div class="tab-content">
   <div class="tab-pane active" id="qrcode">
     <div class="spacer40"></div>
-    <h3>Scan this QRcode with your BitID enabled mobile wallet.</h3>
-    <p>You can also click on the QRcode if you have a BitID enabled desktop wallet.
+    <h3>Scan this QRcode with your DigiID enabled mobile wallet.</h3>
+    <p>You can also click on the QRcode if you have a DigiID enabled desktop wallet.
     <div class="spacer20"></div>
-    <a href="<%= bitid.uri %>">
-      <img alt="Click on QRcode to activate compatible desktop wallet" src="<%= bitid.qrcode %>"/>
+    <a href="<%= digiid.uri %>">
+      <img alt="Click on QRcode to activate compatible desktop wallet" src="<%= digiid.qrcode %>"/>
     </a>
     <div class="spacer40"></div>
     <p>No compatible wallet ? Use <a id="gomanual" href="#">manual signing</a>.</p>
@@ -19,16 +19,16 @@
     <div class="spacer50"></div>
     <h3>Manual signing</h3>
     <p>The user experience is quite combersome, but it has the advangage of being compatible with all wallets
-    including Bitcoin Core.</p>
-    <p>Please sign the challenge in the box below using the private key of this Bitcoin address you want to
-    identify yourself with. Copy the text, open your wallet, choose your Bitcoin address, select the sign message
+    including DigiByte Core.</p>
+    <p>Please sign the challenge in the box below using the private key of this DigiByte address you want to
+    identify yourself with. Copy the text, open your wallet, choose your DigiByte address, select the sign message
     function, paste the text into the message input and sign. After it is done, copy and paste the signature 
     into the field below.</p>
     <p>Cumbersome. Yep. Much better with a simple scan or click using a compatible wallet :)</p>
-    <pre><%= bitid.uri %></pre>
+    <pre><%= digiid.uri %></pre>
     <div class="form-group">
-      <label>Bitcoin address</label>
-      <input type="text" name="address" id="address" class="form-control" placeholder="Enter your public Bitcoin address">
+      <label>DigiByte address</label>
+      <input type="text" name="address" id="address" class="form-control" placeholder="Enter your public DigiByte address">
     </div>
     <div class="form-group">
       <label>Signature</label>
@@ -59,7 +59,7 @@
   function setCurl() {
     $("#curl").html("curl -X POST <%= callbackIndexUrl.replace("/", "\\/") %> \\\n"
 + "  --header \"Content-Type: application/json\" \\\n"
-+ "  --data '{\"uri\" : \"<%= bitid.uri %>\", \n"
++ "  --data '{\"uri\" : \"<%= digiid.uri %>\", \n"
 + "    \"address\" : \"" + $("#address").val() + "\", \n"
 + "    \"signature\" : \"" + $("#signature").val() + "\"}'");
   }
@@ -67,7 +67,7 @@
     $("#check").button('loading');
     $.ajax({
       url: "<%= callbackIndexPath %>",
-      data: {uri: '<%- bitid.uri %>', address: $('#address').val(), signature: $('#signature').val()},
+      data: {uri: '<%- digiid.uri %>', address: $('#address').val(), signature: $('#signature').val()},
       type: "post",
       error: function(data) {
         $("#check").button('reset');
